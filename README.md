@@ -1,19 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dail
+# dail <img src="man/figures/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dail)](https://cran.r-project.org/package=dail)
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/dail)](https://CRAN.R-project.org/package=dail)
+[![CRAN_Download_Badge](http://cranlogs.r-pkg.org/badges/grand-total/dail)](https://CRAN.R-project.org/package=dail)
 <!-- badges: end -->
 
-Versão: 1.1
-
 O pacote DAIL (Data from Access to Information Law) permite acessar via
-R os dados dos pedidos e recursos no âmbito da Lei de Acesso à
-Informação (LAI) - Lei 12.527/2011. No site da Controladoria-Geral da
-União (CGU) estão disponíveis as estatísticas dos pedidos e recursos, no
-âmbito do Executivo Federal, desde o ano de 2012. Entretanto, os
-conteúdos dos pedidos, das respostas e dos recursos foram
+R - no âmbito do Executivo Federal - os dados dos pedidos e recursos
+solicitados via [Lei de Acesso à
+Informação](http://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm)
+(LAI). No site da Controladoria-Geral da União (CGU) estão disponíveis
+as estatísticas dos pedidos e recursos desde o ano de 2012. Entretanto,
+os conteúdos dos pedidos, das respostas e dos recursos foram
 disponibilizados apenas a partir de 2015. Segundo o órgão, isso se dá em
 função das necessidades de regulamentação e da prévia
 orientação/capacitação operacional dos órgãos federais para tal abertura
@@ -27,14 +30,15 @@ recursos entre 2012 e 2014.
 
 ## Instalação
 
-Para instalar via [CRAN](https://CRAN.R-project.org):
+Para instalar via [CRAN](https://CRAN.R-project.org/package=dail):
 
 ``` r
 install.packages("dail")
 library(dail)
 ```
 
-Para instalar a versão em desenvolvimento [GitHub](https://github.com/):
+Para instalar a versão em desenvolvimento
+[(GitHub)](https://github.com/):
 
 ``` r
 install.packages("devtools")
@@ -42,10 +46,10 @@ devtools::install_github("igorlaltuf/dail")
 library(dail)
 ```
 
-## Exemplo
+## Exemplos
 
-Buscar por todos os pedidos de acesso à informação que contêm a palavra
-“PAC” entre os anos de 2015 e 2021:
+Solicitar todos os pedidos de acesso à informação que contêm a palavra
+“PAC” entre os anos de 2015 e 2022:
 
 ``` r
 requests(search = 'PAC') 
@@ -57,6 +61,21 @@ Também é possível inserir mais de uma palavra no argumento search:
 requests(search = 'Programa de Aceleração do Crescimento')
 ```
 
+No argumento search, o algoritmo busca exatamente pela expressão
+informada, ou seja, ele não encontra as variações de uma mesma palavra.
+Ex: se você digitou a palavra no singular, ele não retorna os pedidos
+que contém a palavra no plural. Uma forma de contornar isso é fazendo
+mais de uma requisição:
+
+``` r
+t <- requests(search = 'ovni')
+t2 <- requests(search = 'ovnis')
+t3 <- requests(search = 'objeto voador não identificado')
+t4 <- requests(search = 'objetos voadores não identificados')
+
+total <- unique(rbind(t,t2,t3,t4))
+```
+
 Buscar os pedidos apenas para anos específicos:
 
 ``` r
@@ -64,22 +83,29 @@ intervalo <- c(2016,2017,2018)
 requests(year = intervalo, search = 'PAC')
 ```
 
+Filtrar os pedidos pelo conteúdo das respostas:
+
+``` r
+intervalo <- c(2016,2017,2018)
+requests(year = intervalo, search = 'PAC', answer = T)
+```
+
 Baixar todos os pedidos de todos os anos:
 
 ``` r
-requests_all()
+requests()
 ```
 
-Baixar os recursos que contenham a palavra ‘Programa’:
+Solicitar os recursos que contenham a palavra ‘Programa’:
 
 ``` r
 appeals(search = 'Programa')
 ```
 
-Baixar todos os recursos de todos os anos:
+Acessar todos os recursos de todos os anos:
 
 ``` r
-appeals_all()
+appeals()
 ```
 
 ## “Mas eu não sei usar o R e preciso baixar os pedidos da LAI. O que eu faço?”
@@ -119,7 +145,7 @@ citation('dail')
 
 ## Dicionário de dados
 
-# Pedidos
+### Pedidos
 
 -   Protocolo: número do protocolo do pedido;
 -   Orgão: nome do órgão destinatário do pedido;
@@ -143,7 +169,7 @@ citation('dail')
 -   Especificação Decisão: subtipo da resposta dada ao pedido (campo em
     branco para pedidos que ainda estejam na situação “Em Tramitação”);
 
-# Recursos
+### Recursos
 
 -   IdRecurso: identificador único do recurso (não mostrado no sistema);
 -   IdRecursoPrecedente: identificador único do recurso que precedeu
