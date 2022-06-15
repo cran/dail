@@ -13,17 +13,12 @@
 #' \dontrun{appeals(search = 'PAC')}
 #' @export
 appeals <- function(year = 'all', answer = F, search = 'all') {
-  old <- Sys.time() # to calculate execution time
 
   if (answer == F) col_filter <- '.desc_recurso'
   if (answer == T) col_filter <- '.resposta_recurso'
 
   year.options <- c(2015:format(Sys.Date(), "%Y"))
   links <- paste0('https://dadosabertos-download.cgu.gov.br/FalaBR/Arquivos_FalaBR_Filtrado/Arquivos_csv_', year.options, '.zip')
-  # if the user does not enter the year, data for all years will be downloaded
-  if (year == 'all') {
-    year <- year.options
-  }
   protocolo <- palavras <- NULL
   `%!in%` = Negate(`%in%`) # creates operator
   if(sum(stringr::str_count(search, '\\w+')) > 1){
@@ -39,6 +34,11 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
 
   colnames(tabela) <- nomes.colunas
   dir.temp <- tempdir()
+
+  # if the user does not enter the year, data for all years will be downloaded
+  if ('all' %in% year) {
+    year <- year.options
+  }
 
   # allows to include more than one year at a time with a vector
   for(i in year) {
@@ -72,7 +72,7 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
     # read the files
     lista.arquivos.locais <- list.files(path = dir.temp, pattern = "*.csv", full.names = TRUE)
     caminho.arquivo <- stringr::str_subset(lista.arquivos.locais, paste0("Recursos_csv_",i))
-    var <- readr::read_csv2(file = caminho.arquivo, col_names = FALSE, quote = '\'', locale = readr::locale(encoding="UTF-16LE"))
+    var <- readr::read_csv2(file = caminho.arquivo, col_names = FALSE, quote = '\'', show_col_types = FALSE, locale = readr::locale(encoding="UTF-16LE"))
     colnames(var) <- nomes.colunas
 
     tabela <- rbind(tabela, var)
@@ -118,8 +118,6 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
 
   }
 
-  new <- Sys.time() - old # calculate difference
-  print(paste0('Consulta finalizada em ', round(new, 2),' segundos.'))
-  print(paste0('Query completed in ', round(new, 2),' seconds'))
+  print('Consulta finalizada.')
   return(tabela.final)
 }
