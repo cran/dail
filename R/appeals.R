@@ -19,7 +19,7 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
 
   year.options <- c(2015:format(Sys.Date(), "%Y"))
   links <- paste0('https://dadosabertos-download.cgu.gov.br/FalaBR/Arquivos_FalaBR_Filtrado/Arquivos_csv_', year.options, '.zip')
-  protocolo <- palavras <- NULL
+  protocolo <- palavras <- id_recurso <- NULL
   `%!in%` = Negate(`%in%`) # creates operator
   if(sum(stringr::str_count(search, '\\w+')) > 1){
     search <- unlist(strsplit(search, split = " "))
@@ -79,7 +79,7 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
     rm(list = 'var') # remove variável para liberar RAM
   }
 
-  if (search == 'all') {
+  if ('all' %in% search) {
     tabela.final <- tabela
   } else {
 
@@ -99,14 +99,18 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
       dplyr::filter(palavras %in% search) %>%
       unique()
 
-    colnames(tabela.parcial) <- nomes.colunas
+    colnames(tabela.parcial) <- c('id_recurso','id_recurso_precedente','desc_recurso','id_pedido',
+                                  'id_solicitante','protocolo_pedido','orgao_destinatario','instancia',
+                                  'situacao','data_registro','prazo_atendimento','origem_solicitacao',
+                                  'tipo_recurso','data_resposta','resposta_recurso','tipo_resposta',
+                                  'palavras')
 
     tabela.final <- rbind(tabela.final, tabela.parcial)
   }
 
   if(sum(stringr::str_count(search, '\\w+')) > 1){
     count <- tabela.final %>%
-      dplyr::group_by(protocolo) %>%
+      dplyr::group_by(id_recurso) %>%
       dplyr::count()
 
     tabela.final <- tabela.final %>%
