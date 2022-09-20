@@ -4,22 +4,24 @@
 #'
 #' @importFrom utils download.file unzip
 #'
-#' @param year selects the years which data will be downloaded
-#' @param search selects the keyword to be searched
-#' @param answer if true, fetches the content of the search argument in the appeals responses
+#' @param year selects the years which data will be downloaded. integer.
+#' @param agency selects the public agency to be searched. see the available agencies in agencies_initials. character.
+#' @param search selects the keyword to be searched. character.
+#' @param answer if true, fetches the content of the search argument in the appeals responses. boolean.
+#'
 #'
 #' @return a dataframe with appeals containing the keyword
 #' @examples
 #' \dontrun{appeals(search = 'PAC')}
 #' @export
-appeals <- function(year = 'all', answer = F, search = 'all') {
+appeals <- function(year = 'all', agency = 'all', search = 'all', answer = F) {
 
   if (answer == F) col_filter <- '.desc_recurso'
   if (answer == T) col_filter <- '.resposta_recurso'
 
   year.options <- c(2015:format(Sys.Date(), "%Y"))
   links <- paste0('https://dadosabertos-download.cgu.gov.br/FalaBR/Arquivos_FalaBR_Filtrado/Arquivos_csv_', year.options, '.zip')
-  protocolo <- palavras <- id_recurso <- NULL
+  protocolo <- palavras <- id_recurso <- orgao_destinatario <- NULL
   `%!in%` = Negate(`%in%`) # creates operator
   if(sum(stringr::str_count(search, '\\w+')) > 1){
     search <- unlist(strsplit(search, split = " "))
@@ -53,7 +55,7 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
     #
     # Download data from the CGU for the selected years.
     download_lai <- function() {
-      download.file(links[x], paste(dir.temp, stringr::str_sub(links[x],start = -21), sep = '\\')) # fazer com que o nome do arquivo seja dinâmico
+      download.file(links[x], paste(dir.temp, stringr::str_sub(links[x],start = -21), sep = '/')) # fazer com que o nome do arquivo seja dinâmico
     }
 
     # checks if the file has been previously downloaded
@@ -77,6 +79,12 @@ appeals <- function(year = 'all', answer = F, search = 'all') {
 
     tabela <- rbind(tabela, var)
     rm(list = 'var') # remove variável para liberar RAM
+  }
+
+  if ('all' %in% agency) {
+  } else {
+    tabela <- tabela %>%
+      dplyr::filter(stringr::str_detect(orgao_destinatario, agency))
   }
 
   if ('all' %in% search) {
