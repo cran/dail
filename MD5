@@ -1,10 +1,10 @@
-917ac524310775a452c630a778d91dfa *DESCRIPTION
+3d3d72a4b91def089e6eb4a1f2769607 *DESCRIPTION
 d0bf6853e15e9f60c0d4ce7744c05bfb *LICENSE
 b261c623941326e429bc7c29c55c76a3 *NAMESPACE
-d768e6dc14a15cafc99ff4b1ac4f3720 *R/appeals.R
-70a28d055d7c761ddefa1691b735b0c1 *R/requests.R
+7a4cc41e715e3867a639d11e60c1c753 *R/appeals.R
+5e5a0916634d487b081c5dcfe4738cc6 *R/requests.R
 b56ff2b193ecba52f9ec7f3b10cca008 *R/utils-pipe.R
-5984e533d0b92bc233d247231875a862 *README.md
+2d54aac463c0dede2a9394e685369ec4 *README.md
 d9a63c3217fa1ba88e1933c8c11390ae *inst/CITATION
 4762b13aadfe2300df236c32dea51eb2 *inst/meme.png
 05232bd0d149262b59e4f03f44d3a0da *man/appeals.Rd
@@ -12,5 +12,5 @@ d9a63c3217fa1ba88e1933c8c11390ae *inst/CITATION
 8f4aad003a999fae004ba9361f9a99d6 *man/pipe.Rd
 5f4ea216902d1dcec1cc0475ec8026e0 *man/requests.Rd
 90c20e89b11e79984882fd489b7d3595 *tests/testthat.R
-1ced22e43d698c5a7e341f52619f9119 *tests/testthat/test-appeals.R
-399b09fb10efa25b208d32aad1d31de4 *tests/testthat/test-requests.R
+85bc32b3003903f1178bfc4003e88900 *tests/testthat/test-appeals.R
+3b30fc43fc380f2990721b8cb31127d0 *tests/testthat/test-requests.R
