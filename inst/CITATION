@@ -1,8 +1,5 @@
-citHeader("To cite dail in publications use:
-")
-
-citEntry(
-  entry    = "Misc",
+bibentry(
+  bibtype = "Misc",
   title    = "Data from Access to Information Law - DAIL",
   author   = as.person("Igor Laltuf"),
   year     = 2022,

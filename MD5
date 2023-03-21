@@ -1,12 +1,12 @@
-20286c445f6175e48f8f1988efa8f133 *DESCRIPTION
+6f0e652147ba85c5be533f31c1c494de *DESCRIPTION
 d0bf6853e15e9f60c0d4ce7744c05bfb *LICENSE
 d87f38407999695fa154d945464e1c2b *NAMESPACE
-7a4cc41e715e3867a639d11e60c1c753 *R/appeals.R
+50b1ca317ef51441899c649dd9588db5 *R/appeals.R
 50af2df152495060dd64807ddba5204c *R/corporateCardExpenses.R
-5e5a0916634d487b081c5dcfe4738cc6 *R/requests.R
+55fe6591ef9c881ddbbad145becce38f *R/requests.R
 b56ff2b193ecba52f9ec7f3b10cca008 *R/utils-pipe.R
-2d54aac463c0dede2a9394e685369ec4 *README.md
-d9a63c3217fa1ba88e1933c8c11390ae *inst/CITATION
+5984e533d0b92bc233d247231875a862 *README.md
+fca168b25a4bba604ee7ce538cb47cbc *inst/CITATION
 4762b13aadfe2300df236c32dea51eb2 *inst/meme.png
 05232bd0d149262b59e4f03f44d3a0da *man/appeals.Rd
 d5c68321dd741441c03696b1afa4ed56 *man/corporateCardExpenses.Rd
@@ -14,6 +14,6 @@ d5c68321dd741441c03696b1afa4ed56 *man/corporateCardExpenses.Rd
 8f4aad003a999fae004ba9361f9a99d6 *man/pipe.Rd
 5f4ea216902d1dcec1cc0475ec8026e0 *man/requests.Rd
 90c20e89b11e79984882fd489b7d3595 *tests/testthat.R
-85bc32b3003903f1178bfc4003e88900 *tests/testthat/test-appeals.R
+a3644426ece9bfd56c0393f41f121a6d *tests/testthat/test-appeals.R
 60b8de3002d2088c29d5a7480b86b38f *tests/testthat/test-corporateCardExpenses.R
-3b30fc43fc380f2990721b8cb31127d0 *tests/testthat/test-requests.R
+54b4fdc5573ff886a679ba31843b6eb7 *tests/testthat/test-requests.R

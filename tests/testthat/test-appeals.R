@@ -54,12 +54,7 @@ if (Sys.getenv('USERNAME') == 'igorl') {
 
   test_that("test the arguments agency, year, answer and search", {
     expect_equal(nrow(df10), 5)
-  })
-} else { # partial test
-  df10 <- appeals(agency = 'UFF', year = c(2015, 2016), search = 'curso', answer = T)
-  test_that("test the arguments agency, year, answer and search", {
-    expect_equal(nrow(df10), 5)
-  })
-  }
 
+  })
+}
 

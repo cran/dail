@@ -1,6 +1,6 @@
 Package: dail
 Title: Data from Access to Information Law
-Version: 1.5
+Version: 1.5.2
 Authors@R: 
     person("Igor", "Laltuf", , "igorlaltuf@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5614-4404"))
@@ -14,8 +14,8 @@ Suggests: testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: R (>= 2.10)
 NeedsCompilation: no
-Packaged: 2023-01-23 16:02:41 UTC; igorl
+Packaged: 2023-03-21 00:40:44 UTC; igorl
 Author: Igor Laltuf [aut, cre] (<https://orcid.org/0000-0002-5614-4404>)
 Maintainer: Igor Laltuf <igorlaltuf@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-01-23 16:40:07 UTC
+Date/Publication: 2023-03-21 08:50:09 UTC
